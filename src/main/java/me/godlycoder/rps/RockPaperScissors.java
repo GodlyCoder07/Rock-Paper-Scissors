@@ -81,10 +81,14 @@ public class RockPaperScissors {
             e.printStackTrace();
         }
         rounds++;
-        System.out.printf("\nPerson's Choice: %s", playerChoice);
-        System.out.printf("\nAI's Choice: %s", aiChoice);
-        System.out.printf("\nRounds: %d", rounds);
-        System.out.printf("\nPoints: Person: %d\tAI: %d", points[0], points[1]);
+        System.out.println();
+        System.out.printf("Person's Choice: %s", playerChoice);
+        System.out.println();
+        System.out.printf("AI's Choice: %s", aiChoice);
+        System.out.println();
+        System.out.printf("Rounds: %d", rounds);
+        System.out.println();
+        System.out.printf("Points: Person: %d\tAI: %d", points[0], points[1]);
     }
 
 }
