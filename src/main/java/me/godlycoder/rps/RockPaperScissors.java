@@ -9,16 +9,23 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-@Author(name = "Godly Coder", date = "5-26-2021")
+@Author(name = "Godly Coder", dateCreated = "5-26-2021", dateUpdated = "5-27-2021")
 public class RockPaperScissors {
     public static void main(String[] args) {
+        System.out.println("Rock Paper Scissors - By: Godly Coder");
+        System.out.println("Choose a move: Rock Paper Scissors");
         RockPaperScissors rockPaperScissors = new RockPaperScissors();
-
-        rockPaperScissors.play();
+        while (rockPaperScissors.points[0] < 3 && rockPaperScissors.points[1] < 3) {
+            rockPaperScissors.play();
+        }
+        System.out.println();
+        System.out.println(rockPaperScissors.points[0] > rockPaperScissors.points[1] ? "Final Winner: Person Wins" : "Final Winner: AI Wins");
     }
 
     String playerChoice;
     String aiChoice;
+    int rounds;
+    int[] points = new int[2];
 
     public Class<? extends Moves> playerMove() {
         Scanner scanner = new Scanner(System.in);
@@ -55,23 +62,29 @@ public class RockPaperScissors {
     }
 
     public void play() {
-        System.out.println("Rock Paper Scissors - By: Godly Coder");
-        System.out.println("Choose a move: Rock Paper Scissors");
+        final Class<? extends Moves> AI_MOVE = aiMove();
+        final Class<? extends  Moves> PLAYER_MOVE = playerMove();
+
         try {
-            if (aiMove() == playerMove()) {
+            if (AI_MOVE == PLAYER_MOVE) {
                 System.out.println("Winner: Tie");
             }
-            else if (playerMove().getDeclaredConstructor().newInstance().beats(aiMove())) {
+            else if (PLAYER_MOVE.getDeclaredConstructor().newInstance().beats(AI_MOVE)) {
+                points[0] ++;
                 System.out.println("Winner: Player");
             }
-            else if (aiMove().getDeclaredConstructor().newInstance().beats(playerMove())) {
+            else if (AI_MOVE.getDeclaredConstructor().newInstance().beats(PLAYER_MOVE)) {
+                points[1] ++;
                 System.out.println("Winner: AI");
             }
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }
-        System.out.println("Person's Choice: " + playerChoice);
-        System.out.println("AI's Choice: " + aiChoice);
+        rounds++;
+        System.out.printf("\nPerson's Choice: %s", playerChoice);
+        System.out.printf("\nAI's Choice: %s", aiChoice);
+        System.out.printf("\nRounds: %d", rounds);
+        System.out.printf("\nPoints: Person: %d\tAI: %d", points[0], points[1]);
     }
 
 }

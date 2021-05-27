@@ -2,5 +2,6 @@ package me.godlycoder.rps.annotations;
 
 public @interface Author {
     String name();
-    String date() default "";
+    String dateCreated() default "";
+    String dateUpdated() default "";
 }
